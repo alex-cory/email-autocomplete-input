@@ -23,7 +23,7 @@ import { observable } from 'mobx'
 const email = observable('')
 
 render(
-  <EmailAutocompleteInput value={email} onChange={({ target: { value } }) => email.set(value)} />,
+  <EmailAutocompleteInput value={email} onChange={value => email.set(value)} />,
   document.body
 )
 ```
