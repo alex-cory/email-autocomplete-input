@@ -18,7 +18,7 @@ export default class EmailAutocompleteInput extends React.Component {
   }
 
   suggest(email) {
-  	const [ emailName, partialDomain ] = email.split('@')
+    const [ emailName, partialDomain ] = email.split('@')
     if (!partialDomain || email.length <= this.prevValue.length) return ''
     const domain = this.domains.find(d => d.indexOf(partialDomain) === 0) || ''
     return domain.replace(partialDomain, '')
