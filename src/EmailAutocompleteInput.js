@@ -10,7 +10,7 @@ export default class EmailAutocompleteInput extends React.Component {
   @observable email = this.props.value || ''
 
   handleChange = ({ target: { value } }) => {
-  	const suggestion = this.suggest(value)
+    const suggestion = this.suggest(value)
     this.email = value + suggestion
     if (suggestion) this.highlight(suggestion)
     this.props.onChange(this.email)
