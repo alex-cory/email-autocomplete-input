@@ -36,6 +36,32 @@ const Input = styled(EmailAutocompleteInput)`
   font-size:        12pt;
 `
 
+const Row = styled.h4`
+  display: flex;
+  flex-direction: row;
+  font-weight: 100;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  letter-spacing: 1px;
+  justify-content: center;
+  align-items: center;
+`
+
+const Link = styled.a.attrs({
+  href: 'https://github.com/alex-cory'
+})`
+  margin: 0 3px;
+  color: #ea6b2b;
+  text-decoration: none;
+`
+
+const Love = styled.span`
+  &:before {
+    content: '❤';
+    color: #ea6b2b;
+    margin: 0 3px;
+  }
+`
+
 const email = observable('')
 
 render(
@@ -43,6 +69,7 @@ render(
     <Col>
       <Title>Email Autocomplete Input</Title>
       <Input value={email} onChange={value => email.set(value)} />
+      <Row>Made with <Love /> by <Link>@alex-cory</Link></Row>
     </Col>
   </Page>,
   document.getElementById('root')
