@@ -5,7 +5,7 @@ Email Autocomplete Input
 
 Play with it [here](https://alex-cory.github.io/email-autocomplete-input/)!
 
-![Alt text](./public/email-autocomplete-input.gif)
+<img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input.gif?raw=true" width="100%">
 
 Installation
 ------------
