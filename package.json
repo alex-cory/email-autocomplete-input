@@ -1,6 +1,6 @@
 {
   "name": "email-autocomplete-input",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "homepage": "https://alex-cory.github.io/email-autocomplete-input",
   "main": "/email-autocomplete-compiled.js",
   "devDependencies": {

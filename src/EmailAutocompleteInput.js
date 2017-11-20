@@ -5,7 +5,7 @@ import { observable } from 'mobx'
 
 @observer
 export default class EmailAutocompleteInput extends React.Component {
-  domains = this.props.domains || ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com']
+  domains = [...(this.props.domains || []), 'yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']
   prevValue = ''
   @observable email = this.props.value || ''
 
