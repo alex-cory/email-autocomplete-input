@@ -23,6 +23,8 @@ function _initDefineProp(target, property, descriptor, context) {
   });
 }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -80,7 +82,7 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _this.domains = _this.props.domains || ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com'], _this.prevValue = '', _initDefineProp(_this, 'email', _descriptor, _this), _this.handleChange = function (_ref2) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _initDefineProp(_this, 'email', _descriptor, _this), _this.handleChange = function (_ref2) {
       var value = _ref2.target.value;
 
       var suggestion = _this.suggest(value);

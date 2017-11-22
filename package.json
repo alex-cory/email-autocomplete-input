@@ -1,8 +1,11 @@
 {
   "name": "email-autocomplete-input",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "homepage": "https://alex-cory.github.io/email-autocomplete-input",
   "main": "/email-autocomplete-compiled.js",
+  "description": "A simple email autocomplete input for React.js",
+  "author": "Alex Cory <results@alexcory.com>",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "7.1.2",
     "babel-core": "6.25.0",
@@ -62,7 +65,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "build-component": "NODE_ENV=development; BABEL_ENV=$NODE_ENV; babel src/EmailAutocompleteInput.js --out-file ./email-autocomplete-compiled.js --presets=react --plugins=transform-decorators-legacy",
+    "build-component": "export NODE_ENV=development && export BABEL_ENV=$NODE_ENV && babel src/EmailAutocompleteInput.js --out-file ./email-autocomplete-compiled.js --presets=react --plugins=transform-decorators-legacy",
     "publish": "yarn build-component && yarn publish"
   },
   "jest": {
@@ -109,5 +112,19 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "keywords": [
+    "react-component",
+    "react",
+    "autocomplete",
+    "email",
+    "input"
+  ],
+  "tags": [
+    "react-component",
+    "react",
+    "autocomplete",
+    "email",
+    "input"
+  ]
 }
