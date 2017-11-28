@@ -30,6 +30,7 @@ render(
 
 Props
 -----
-| Props                 | Description                                                                    |
-| --------------------- | ------------------------------------------------------------------------------ |
-| `validate`            | This will highlight with a red, yellow, or green border if the email is valid. |
+| Props                 | Description                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `validate`            | This will highlight the input with a red, yellow, or green border if the email is valid. |
+| `domains`             | This will add additional domains to the autocomplete.                                    |
