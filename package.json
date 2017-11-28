@@ -1,6 +1,6 @@
 {
   "name": "email-autocomplete-input",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://alex-cory.github.io/email-autocomplete-input",
   "main": "/email-autocomplete-compiled.js",
   "description": "A simple email autocomplete input for React.js",

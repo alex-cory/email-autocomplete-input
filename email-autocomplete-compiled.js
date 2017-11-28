@@ -9,6 +9,7 @@ var _class,
     _value,
     _class2,
     _descriptor,
+    _descriptor2,
     _jsxFileName = 'src/EmailAutocompleteInput.js';
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -64,12 +65,13 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import React from 'react';
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
-var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Component) {
-  _inherits(EmailAutocompleteInput, _React$Component);
+var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) {
+  _inherits(EmailAutocompleteInput, _Component);
 
   function EmailAutocompleteInput() {
     var _ref;
@@ -82,7 +84,7 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _initDefineProp(_this, 'email', _descriptor, _this), _this.handleChange = function (_ref2) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _initDefineProp(_this, 'email', _descriptor, _this), _initDefineProp(_this, 'isValid', _descriptor2, _this), _this.handleChange = function (_ref2) {
       var value = _ref2.target.value;
 
       var suggestion = _this.suggest(value);
@@ -90,6 +92,18 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
       if (suggestion) _this.highlight(suggestion);
       _this.props.onChange(_this.email);
       _this.prevValue = value;
+      if (_this.props.validate) _this.validate();
+    }, _this.validate = function () {
+      var inputIsFocused = _this._input === document.activeElement;
+      var regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
+      var isValid = regex.test(_this.email);
+      if (!_this.email || !_this.prevValue) {
+        _this.isValid = null;
+      } else if (inputIsFocused) {
+        _this.isValid = isValid ? 'yes' : 'maybe';
+      } else if (!inputIsFocused) {
+        _this.isValid = isValid ? 'yes' : 'no';
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -99,7 +113,8 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
       var _email$split = email.split('@'),
           _email$split2 = _slicedToArray(_email$split, 2),
           emailName = _email$split2[0],
-          partialDomain = _email$split2[1];
+          partialDomain = _email$split2[1]; // eslint-disable-line
+
 
       if (!partialDomain || email.length <= this.prevValue.length) return '';
       var domain = this.domains.find(function (d) {
@@ -127,16 +142,19 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
           className = _props.className,
           props = _objectWithoutProperties(_props, ['className']);
 
-      return React.createElement('input', _extends({}, props, {
+      return React.createElement(Input, _extends({}, props, {
+        isValid: this.isValid,
         className: className + ' email-autocomplete-input',
         value: this.email,
+        onFocus: this.validate,
+        onBlur: this.validate,
         onChange: this.handleChange,
-        ref: function ref(r) {
+        innerRef: function innerRef(r) {
           return _this3._input = r;
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 54
         },
         __self: this
       }));
@@ -144,11 +162,31 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_React$Compo
   }]);
 
   return EmailAutocompleteInput;
-}(React.Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'email', [observable], {
+}(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'email', [observable], {
   enumerable: true,
   initializer: function initializer() {
     return this.props.value || '';
   }
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'isValid', [observable], {
+  enumerable: true,
+  initializer: function initializer() {
+    return null;
+  }
 })), _class2)) || _class;
 
 export { EmailAutocompleteInput as default };
+
+
+var colors = {
+  maybe: 'yellow',
+  yes: 'limegreen',
+  no: 'red'
+};
+
+var Input = styled.input.withConfig({
+  displayName: 'EmailAutocompleteInput__Input'
+})(['', ''], function (_ref3) {
+  var validate = _ref3.validate,
+      isValid = _ref3.isValid;
+  return validate && css(['outline:none;', ''], isValid && css(['border:1px solid ', ' !important;'], colors[isValid]));
+});
