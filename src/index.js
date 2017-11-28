@@ -10,18 +10,12 @@ const Input = styled(EmailAutocompleteInput)`
   font-family:      Helvetica, Arial, sans-serif;
   letter-spacing:   0.5px;
   line-height:      1.3em;
-  display:          inline-block;
   box-sizing:       border-box;
-  background-color: off-white;
-  border-radius:    5px;
-  outline:          none;
   border:           1px solid lightgray;
-  border-image:     initial;
   padding:          0.5rem;
   border-radius:    3px;
-  background:       white;
-  width:            100%;
   font-size:        12pt;
+  outline:          none;
 `
 
 window.onload = () => {
@@ -35,7 +29,7 @@ render(
   <Page>
     <Col>
       <Title>Email Autocomplete Input</Title>
-      <Input value={email} onChange={value => email.set(value)} />
+      <Input value={email} onChange={value => email.set(value)} validate />
       <Row>Made with <Love /> by <Link>@alex-cory</Link></Row>
     </Col>
   </Page>,
