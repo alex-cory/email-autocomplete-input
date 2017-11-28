@@ -1,22 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Page } from 'components'
+import { Page, Row, Col, Title, GithubLink as Link, Heart as Love } from 'components'
 import { observable } from 'mobx'
 import styled from 'styled-components'
 import EmailAutocompleteInput from './EmailAutocompleteInput'
 
-
-const Col = styled.div`
-  display:        flex;
-  flex-direction: column;
-  color:          white;
-`
-
-const Title = styled.h1`
-  text-shadow: 1px 1px grey;
-  font-weight: 100;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-`
 
 const Input = styled(EmailAutocompleteInput)`
   font-family:      Helvetica, Arial, sans-serif;
@@ -36,31 +24,10 @@ const Input = styled(EmailAutocompleteInput)`
   font-size:        12pt;
 `
 
-const Row = styled.h4`
-  display: flex;
-  flex-direction: row;
-  font-weight: 100;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  letter-spacing: 1px;
-  justify-content: center;
-  align-items: center;
-`
-
-const Link = styled.a.attrs({
-  href: 'https://github.com/alex-cory'
-})`
-  margin: 0 3px;
-  color: #ea6b2b;
-  text-decoration: none;
-`
-
-const Love = styled.span`
-  &:before {
-    content: '❤';
-    color: #ea6b2b;
-    margin: 0 3px;
-  }
-`
+window.onload = () => {
+  const input = document.getElementsByClassName('email-autocomplete-input')[0]
+  input.focus()
+}
 
 const email = observable('')
 

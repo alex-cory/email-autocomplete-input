@@ -1,1 +1,6 @@
 export * from './Page'
+export * from './Col'
+export * from './Row'
+export * from './Title'
+export * from './GithubLink'
+export * from './Heart'
