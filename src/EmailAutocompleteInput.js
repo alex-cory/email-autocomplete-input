@@ -37,7 +37,7 @@ export default class EmailAutocompleteInput extends Component {
 
   validate = () => {
     const inputIsFocused = this._input === document.activeElement
-    var regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i  // eslint-disable-line
+    const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i  // eslint-disable-line
     const isValid = regex.test(this.email)
     if (!this.email || !this.prevValue) {
       this.isValid = null

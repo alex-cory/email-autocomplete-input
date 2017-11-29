@@ -14,6 +14,8 @@ var _class,
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
   Object.defineProperty(target, property, {
@@ -23,8 +25,6 @@ function _initDefineProp(target, property, descriptor, context) {
     value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
   });
 }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -84,7 +84,7 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) 
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _initDefineProp(_this, 'email', _descriptor, _this), _initDefineProp(_this, 'isValid', _descriptor2, _this), _this.handleChange = function (_ref2) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _initDefineProp(_this, 'email', _descriptor, _this), _initDefineProp(_this, 'isValid', _descriptor2, _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _this.handleChange = function (_ref2) {
       var value = _ref2.target.value;
 
       var suggestion = _this.suggest(value);
@@ -105,7 +105,8 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) 
         _this.isValid = isValid ? 'yes' : 'no';
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
+  } // yes, no, maybe, null
+
 
   _createClass(EmailAutocompleteInput, [{
     key: 'suggest',
@@ -177,10 +178,16 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) 
 export { EmailAutocompleteInput as default };
 
 
-var colors = {
-  maybe: 'yellow',
-  yes: 'limegreen',
-  no: 'red'
+var borderColors = {
+  maybe: '#cfdc00',
+  yes: '#28a745',
+  no: '#dc3545'
+};
+
+var outlineColors = {
+  maybe: 'rgba(207, 220, 0, 0.4)',
+  yes: 'rgba(40,167,69,.25)',
+  no: 'rgba(220,53,69,.25)'
 };
 
 var Input = styled.input.withConfig({
@@ -188,5 +195,5 @@ var Input = styled.input.withConfig({
 })(['', ''], function (_ref3) {
   var validate = _ref3.validate,
       isValid = _ref3.isValid;
-  return validate && css(['outline:none;', ''], isValid && css(['border:1px solid ', ' !important;'], colors[isValid]));
+  return validate && css(['outline:none;', ''], isValid && css(['&:focus{box-shadow:0 0 0 0.2rem ', ';}border:1px solid ', ' !important;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;'], outlineColors[isValid], borderColors[isValid]));
 });
