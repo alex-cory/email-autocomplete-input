@@ -6,10 +6,10 @@ import { observable } from 'mobx'
 
 @observer
 export default class EmailAutocompleteInput extends Component {
+  @observable email = this.props.value || ''
+  @observable isValid = null // yes, no, maybe, null
   domains = [...(this.props.domains || []), 'yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']
   prevValue = ''
-  @observable email = this.props.value || ''
-  @observable isValid = null
 
   handleChange = ({ target: { value } }) => {
     const suggestion = this.suggest(value)
@@ -65,17 +65,27 @@ export default class EmailAutocompleteInput extends Component {
   }
 }
 
-const colors = {
-  maybe: 'yellow',
-  yes: 'limegreen',
-  no: 'red'
+const borderColors = {
+  maybe: '#cfdc00',
+  yes: '#28a745',
+  no: '#dc3545'
+}
+
+const outlineColors = {
+  maybe: 'rgba(207, 220, 0, 0.4)',
+  yes: 'rgba(40,167,69,.25)',
+  no: 'rgba(220,53,69,.25)'
 }
 
 const Input = styled.input`
   ${({ validate, isValid }) => validate && css`
     outline: none;
     ${isValid && css`
-      border: 1px solid ${colors[isValid]} !important;
+      &:focus {
+        box-shadow: 0 0 0 0.2rem ${outlineColors[isValid]};
+      }
+      border: 1px solid ${borderColors[isValid]} !important;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     `}
   `}
 `
