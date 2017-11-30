@@ -12,6 +12,7 @@ export default class EmailAutocompleteInput extends Component {
   prevValue = ''
   prevEmail = ''
 
+
   handleChange = ({ target: { value } }) => {
     const suggestion = this.suggest(value)
     this.email = value + suggestion
@@ -51,6 +52,16 @@ export default class EmailAutocompleteInput extends Component {
     }
   }
 
+  handleBlur = e => {
+    if (this.props.validate) this.validate()
+    if (this.props.onBlur) this.props.onBlur(e)
+  }
+
+  handleFocus = e => {
+    if (this.props.validate) this.validate()
+    if (this.props.onFocus) this.props.onFocus(e)
+  }
+
   render() {
     const { className, ...props } = this.props
     return (
@@ -59,8 +70,8 @@ export default class EmailAutocompleteInput extends Component {
         isValid={this.isValid}
         className={`${className} email-autocomplete-input`}
         value={this.email}
-        onFocus={this.validate}
-        onBlur={this.validate}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
         onChange={this.handleChange}
         innerRef={r => this._input = r}
       />
