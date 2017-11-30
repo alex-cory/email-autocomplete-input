@@ -68,7 +68,7 @@ function _initializerWarningHelper(descriptor, context) {
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { observer } from 'mobx-react';
-import { observable } from 'mobx';
+import { observable, toJS } from 'mobx';
 
 var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) {
   _inherits(EmailAutocompleteInput, _Component);
@@ -84,25 +84,27 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) 
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _initDefineProp(_this, 'email', _descriptor, _this), _initDefineProp(_this, 'isValid', _descriptor2, _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _this.handleChange = function (_ref2) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EmailAutocompleteInput.__proto__ || Object.getPrototypeOf(EmailAutocompleteInput)).call.apply(_ref, [this].concat(args))), _this), _initDefineProp(_this, 'email', _descriptor, _this), _initDefineProp(_this, 'isValid', _descriptor2, _this), _this.domains = [].concat(_toConsumableArray(_this.props.domains || []), ['yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']), _this.prevValue = '', _this.prevEmail = '', _this.handleChange = function (_ref2) {
       var value = _ref2.target.value;
 
       var suggestion = _this.suggest(value);
       _this.email = value + suggestion;
       if (suggestion) _this.highlight(suggestion);
       _this.props.onChange(_this.email);
-      _this.prevValue = value;
       if (_this.props.validate) _this.validate();
+      _this.prevValue = value;
+      _this.prevEmail = value + suggestion;
     }, _this.validate = function () {
       var inputIsFocused = _this._input === document.activeElement;
-      var regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
-      var isValid = regex.test(_this.email);
-      if (!_this.email || !_this.prevValue) {
+      var isValidEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
+      if (!toJS(_this.email)) {
         _this.isValid = null;
-      } else if (inputIsFocused) {
-        _this.isValid = isValid ? 'yes' : 'maybe';
-      } else if (!inputIsFocused) {
-        _this.isValid = isValid ? 'yes' : 'no';
+      } else if (isValidEmail.test(_this.email)) {
+        _this.isValid = 'yes';
+      } else if (inputIsFocused && _this.prevEmail.length !== _this.email.length) {
+        _this.isValid = 'maybe';
+      } else {
+        _this.isValid = 'no';
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   } // yes, no, maybe, null
@@ -155,7 +157,7 @@ var EmailAutocompleteInput = observer(_class = (_class2 = function (_Component) 
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 57
         },
         __self: this
       }));
@@ -179,15 +181,15 @@ export { EmailAutocompleteInput as default };
 
 
 var borderColors = {
-  maybe: '#cfdc00',
   yes: '#28a745',
+  maybe: '#cfdc00',
   no: '#dc3545'
 };
 
-var outlineColors = {
-  maybe: 'rgba(207, 220, 0, 0.4)',
-  yes: 'rgba(40,167,69,.25)',
-  no: 'rgba(220,53,69,.25)'
+var outlineColors = { // source: http://bit.ly/2j2sbyx
+  yes: 'rgba(40, 167, 69, .25)',
+  maybe: 'rgba(207, 220, 0, .25)',
+  no: 'rgba(220, 53, 69, .25)'
 };
 
 var Input = styled.input.withConfig({

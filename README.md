@@ -1,5 +1,6 @@
-<img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input.gif?raw=true" width="100%">
+<!-- <img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input.gif?raw=true" width="100%"> -->
 
+<img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input-validation.gif?raw=true" width="100%">
 Email Autocomplete Input
 ========================
 
@@ -30,7 +31,7 @@ render(
 
 Props
 -----
-| Props                 | Description                                                                              |
-| --------------------- | ---------------------------------------------------------------------------------------- |
-| `validate`            | This will highlight the input with a red, yellow, or green border if the email is valid. |
-| `domains`             | This will add additional domains to the autocomplete.                                    |
+| Props      | Description                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------- |
+| `validate` | This will highlight the input with a red, yellow, or green border if the email is valid. |
+| `domains`  | This will add additional domains to the autocomplete.                                    |
