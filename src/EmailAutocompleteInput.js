@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { observable, toJS } from 'mobx'
 
 
 @observer
@@ -10,14 +10,16 @@ export default class EmailAutocompleteInput extends Component {
   @observable isValid = null // yes, no, maybe, null
   domains = [...(this.props.domains || []), 'yahoo.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'googlemail.com', 'msn.com', 'facebook.com', 'verizon.net', 'outlook.com', 'icloud.com', 'table.co']
   prevValue = ''
+  prevEmail = ''
 
   handleChange = ({ target: { value } }) => {
     const suggestion = this.suggest(value)
     this.email = value + suggestion
     if (suggestion) this.highlight(suggestion)
     this.props.onChange(this.email)
-    this.prevValue = value
     if (this.props.validate) this.validate()
+    this.prevValue = value
+    this.prevEmail = value + suggestion
   }
 
   suggest(email) {
@@ -37,14 +39,15 @@ export default class EmailAutocompleteInput extends Component {
 
   validate = () => {
     const inputIsFocused = this._input === document.activeElement
-    const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i  // eslint-disable-line
-    const isValid = regex.test(this.email)
-    if (!this.email || !this.prevValue) {
+    const isValidEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i  // eslint-disable-line
+    if (!toJS(this.email)) {
       this.isValid = null
-    } else if (inputIsFocused) {
-      this.isValid = isValid ? 'yes' : 'maybe'
-    } else if (!inputIsFocused) {
-      this.isValid = isValid ? 'yes' : 'no'
+    } else if (isValidEmail.test(this.email)) {
+      this.isValid = 'yes'
+    } else if (inputIsFocused && this.prevEmail.length !== this.email.length) {
+      this.isValid = 'maybe'
+    } else {
+      this.isValid = 'no'
     }
   }
 
@@ -66,15 +69,15 @@ export default class EmailAutocompleteInput extends Component {
 }
 
 const borderColors = {
-  maybe: '#cfdc00',
   yes: '#28a745',
+  maybe: '#cfdc00',
   no: '#dc3545'
 }
 
-const outlineColors = {
-  maybe: 'rgba(207, 220, 0, 0.4)',
-  yes: 'rgba(40,167,69,.25)',
-  no: 'rgba(220,53,69,.25)'
+const outlineColors = { // source: http://bit.ly/2j2sbyx
+  yes: 'rgba(40, 167, 69, .25)',
+  maybe: 'rgba(207, 220, 0, .25)',
+  no: 'rgba(220, 53, 69, .25)'
 }
 
 const Input = styled.input`
