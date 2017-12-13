@@ -1,7 +1,7 @@
 <!--
 <img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input.gif?raw=true" width="100%">
 -->
-<img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input-validation.gif?raw=true" width="100%">
+<a href="https://alex-cory.github.io/email-autocomplete-input/"><img src="https://github.com/alex-cory/email-autocomplete-input/blob/master/public/email-autocomplete-input-validation.gif?raw=true" width="100%"></a>
 
 Email Autocomplete Input
 ========================
