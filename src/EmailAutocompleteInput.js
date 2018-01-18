@@ -12,7 +12,6 @@ export default class EmailAutocompleteInput extends Component {
   prevValue = ''
   prevEmail = ''
 
-
   handleChange = ({ target: { value } }) => {
     const suggestion = this.suggest(value)
     this.email = value + suggestion
