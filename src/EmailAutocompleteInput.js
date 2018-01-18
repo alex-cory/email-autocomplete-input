@@ -39,7 +39,7 @@ export default class EmailAutocompleteInput extends Component {
   }
 
   validate = () => {
-    if (this.props.isValid === false) return 'no'
+    // if (this.props.isValid === false) return 'no'
     const inputIsFocused = this._input === document.activeElement
     const isValidEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i  // eslint-disable-line
     if (!toJS(this.email)) {
