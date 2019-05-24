@@ -6,6 +6,8 @@
 Email Autocomplete Input
 ========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/alex-cory/email-autocomplete-input.svg)](https://greenkeeper.io/)
+
 #### Bult using `mobx`, and `react`
 
 Play with it [here](https://alex-cory.github.io/email-autocomplete-input/)!
